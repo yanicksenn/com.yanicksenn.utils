@@ -1,0 +1,15 @@
+
+{
+    "name": "MyPackage.Editor",
+    "rootNamespace": "MyPackage.Editor",
+    "references": ["MyPackage"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
