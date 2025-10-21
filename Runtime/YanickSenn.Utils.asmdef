@@ -1,7 +1,7 @@
 
 {
-    "name": "MyPackage",
-    "rootNamespace": "MyPackage",
+    "name": "YanickSenn.Utils",
+    "rootNamespace": "YanickSenn.Utils",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

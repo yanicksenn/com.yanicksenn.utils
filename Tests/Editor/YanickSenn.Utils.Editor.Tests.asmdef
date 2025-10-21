@@ -1,8 +1,8 @@
 
 {
-    "name": "MyPackage.Editor.Tests",
-    "rootNamespace": "MyPackage.Editor.Tests",
-    "references": ["MyPackage", "MyPackage.Editor", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+    "name": "YanickSenn.Utils.Editor.Tests",
+    "rootNamespace": "YanickSenn.Utils.Editor.Tests",
+    "references": ["YanickSenn.Utils", "YanickSenn.Utils.Editor", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,8 +1,8 @@
 
 {
-    "name": "MyPackage.Editor",
-    "rootNamespace": "MyPackage.Editor",
-    "references": ["MyPackage"],
+    "name": "YanickSenn.Utils.Editor",
+    "rootNamespace": "YanickSenn.Utils.Editor",
+    "references": ["YanickSenn.Utils"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
