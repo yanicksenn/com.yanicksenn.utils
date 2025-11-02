@@ -1,7 +1,6 @@
-
 {
     "name": "com.yanicksenn.utils",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "displayName": "Utils",
     "description": "A package containing a variety of utils of quality of life improvements when working with Untiy.",
     "unity": "6000.0",
@@ -9,6 +8,6 @@
     "author": {
         "name": "YanickSenn.Utils",
         "email": "info@yanicksenn.com",
-        "url": "" 
+        "url": ""
     }
 }
