@@ -1,9 +1,14 @@
-
 {
     "name": "YanickSenn.Utils.Editor",
     "rootNamespace": "YanickSenn.Utils.Editor",
-    "references": ["YanickSenn.Utils"],
-    "includePlatforms": ["Editor"],
+    "references": [
+        "YanickSenn.Utils",
+        "VContainer",
+        "VContainer.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

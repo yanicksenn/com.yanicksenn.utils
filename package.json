@@ -1,13 +1,16 @@
 {
-    "name": "com.yanicksenn.utils",
-    "version": "1.0.2",
-    "displayName": "Utils",
-    "description": "A package containing a variety of utils of quality of life improvements when working with Untiy.",
-    "unity": "6000.0",
-    "unityRelease": "51f1",
-    "author": {
-        "name": "YanickSenn.Utils",
-        "email": "info@yanicksenn.com",
-        "url": ""
-    }
+  "name": "com.yanicksenn.utils",
+  "version": "1.0.4",
+  "displayName": "Utils",
+  "description": "A package containing a variety of utils of quality of life improvements when working with Untiy.",
+  "unity": "6000.0",
+  "unityRelease": "51f1",
+  "author": {
+    "name": "YanickSenn.Utils",
+    "email": "info@yanicksenn.com",
+    "url": ""
+  },
+  "dependencies": {
+    "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.17.0"
+  }
 }

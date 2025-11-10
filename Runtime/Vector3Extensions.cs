@@ -2,6 +2,31 @@ using UnityEngine;
 
 namespace YanickSenn.Utils {
     public static class Vector3Extensions {
+        
+        public static Vector3 ToX(this Vector3 vector) {
+            return new Vector3(vector.x, 0f, 0f);
+        }
+        
+        public static Vector3 ToY(this Vector3 vector) {
+            return new Vector3(0f, vector.y, 0f);
+        }
+        
+        public static Vector3 ToZ(this Vector3 vector) {
+            return new Vector3(0f, 0f, vector.z);
+        }
+
+        public static Vector3 ToXY(this Vector3 vector) {
+            return new Vector3(vector.x, vector.y, 0f);
+        }
+        
+        public static Vector3 ToXZ(this Vector3 vector) {
+            return new Vector3(vector.x, 0f, vector.z);
+        }
+        
+        public static Vector3 ToYZ(this Vector3 vector) {
+            return new Vector3(0f, vector.y, vector.z);
+        }
+
         public static Vector3 WithX(this Vector3 vector, float x) {
             return new Vector3(x, vector.y, vector.z);
         }
