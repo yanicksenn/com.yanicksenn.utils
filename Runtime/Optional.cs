@@ -29,6 +29,10 @@ namespace YanickSenn.Utils
                 ? new Optional<V>()
                 : new Optional<V>(newValue);
         }
+
+        public T OrElse(T other) {
+            return IsAbsent ? other : Value;
+        }
         
         public void DoIfPresent(Action<T> func) {
             if (IsPresent) func.Invoke(value);
