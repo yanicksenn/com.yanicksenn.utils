@@ -4,22 +4,28 @@ using System.Collections.Generic;
 namespace YanickSenn.Utils
 {
     public class Sequencer<T> {
-        private readonly List<T> elements;
-        private int index;
-    
-        public T Current => elements[index];
+        private readonly List<T> _elements;
+        private readonly int _startingIndex;
+        private int _index;
+
+        public T Value => _elements[_index];
 
         public Sequencer(List<T> elements, int startingIndex = 0) {
-            this.elements = elements;
-            index = startingIndex;
+            _elements = elements;
+            _startingIndex = startingIndex;
+            _index = startingIndex;
         }
 
         public void Next() {
-            index = Math.Clamp(index + 1, 0, elements.Count - 1);
+            _index = Math.Clamp(_index + 1, 0, _elements.Count - 1);
         }
 
         public void Previous() {
-            index = Math.Clamp(index - 1, 0, elements.Count - 1);
+            _index = Math.Clamp(_index - 1, 0, _elements.Count - 1);
+        }
+
+        public void SelectStartingValue() {
+            _index = _startingIndex;
         }
     }
 }
