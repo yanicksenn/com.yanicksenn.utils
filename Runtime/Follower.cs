@@ -1,17 +1,22 @@
-using System;
 using UnityEngine;
+using Util;
 
-namespace Util
+namespace YanickSenn.Utils
 {
     [DisallowMultipleComponent]
     public class Follower : MonoBehaviour
     {
-        [SerializeField]
-        public Anchor anchor;
+        [SerializeField] private Anchor anchor;
+        [SerializeField] private Vector3 offset;
+        [SerializeField] private Vector3Mask mask = Vector3Mask.None;
 
         private void LateUpdate() {
-            transform.position = anchor.transform.position;
-            transform.rotation = anchor.transform.rotation;
+            if (anchor == null) {
+                return;
+            }
+
+            var newPos = anchor.transform.position + offset;
+            transform.position = newPos.ApplyInvertedMask(transform.position, mask);
         }
     }
 }
