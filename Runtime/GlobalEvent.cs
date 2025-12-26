@@ -6,7 +6,8 @@ namespace YanickSenn.Utils
     [CreateAssetMenu(fileName = "GlobalEvent", menuName = "Global Event")]
     public class GlobalEvent : ScriptableObject
     {
-        [SerializeField] private bool enabled;
+        [SerializeField] private bool disabled;
+        [SerializeField] private bool debug;
         [SerializeField, TextArea] private string description;
         
         public event Action<Metadata> OnTrigger;
@@ -16,11 +17,23 @@ namespace YanickSenn.Utils
         public void Invoke(object payload) => Invoke(payload: payload, sender: null);
         
         public void Invoke(object payload, Sender sender) {
-            if (!enabled) return;
-            OnTrigger?.Invoke(new Metadata(
+            var metadata = new Metadata(
                 new Optional<object>(payload),
                 new Optional<Sender>(sender),
-                Time.realtimeSinceStartup));
+                Time.realtimeSinceStartup);
+
+            if (debug) {
+                var stateString = disabled ? "DISABLED" : "ENABLED";
+                var senderString = metadata.Sender.IsPresent ? $"Sender: {metadata.Sender.Value.GameObject.name}" : "No Sender";
+                var payloadString = metadata.Payload.IsPresent ? $"Payload: {metadata.Payload.Value}" : "No Payload";
+                Debug.Log($"[{stateString}] {name} invoked - {senderString}, {payloadString}", this);
+            }
+            
+            if (disabled) {
+                return;
+            }
+            
+            OnTrigger?.Invoke(metadata);
         }
 
         [Serializable]
