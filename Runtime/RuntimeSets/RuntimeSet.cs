@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YanickSenn.Utils.RegistryGeneration;
 
 namespace YanickSenn.Utils.RuntimeSets
 {
     [CreateAssetMenu(menuName = "Runtime Set", fileName = "RuntimeSet")]
+    [GenerateInjectionRegistry]
     public class RuntimeSet : ScriptableObject {
         private readonly HashSet<GameObject> _elements = new();
         

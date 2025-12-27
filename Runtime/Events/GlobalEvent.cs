@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using YanickSenn.Utils.Control;
+using YanickSenn.Utils.RegistryGeneration;
 
 namespace YanickSenn.Utils.Events
 {
     [CreateAssetMenu(fileName = "GlobalEvent", menuName = "Global Event")]
+    [GenerateInjectionRegistry]
     public class GlobalEvent : ScriptableObject
     {
         [SerializeField] private bool disabled;

@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using YanickSenn.Utils.Misc;
 
-namespace YanickSenn.Utils.Editor {
+namespace YanickSenn.Utils.Editor.Misc {
     [CustomPropertyDrawer(typeof(Vector3Mask))]
     public class Vector3MaskDrawer : PropertyDrawer {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {

@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using YanickSenn.Utils.Control;
 
-namespace YanickSenn.Utils.Editor
+namespace YanickSenn.Utils.Editor.Control
 {
     [CustomPropertyDrawer(typeof(Prefab<>))]
     public class PrefabDrawer : PropertyDrawer

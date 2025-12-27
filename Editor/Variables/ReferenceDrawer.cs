@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace YanickSenn.Utils.Editor
+namespace YanickSenn.Utils.Editor.Variables
 {
     [CustomPropertyDrawer(typeof(Reference<,>), true)]
     public class ReferenceDrawer : PropertyDrawer

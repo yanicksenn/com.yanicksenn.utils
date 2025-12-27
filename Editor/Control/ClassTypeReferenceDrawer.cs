@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using YanickSenn.Utils.Control;
 
-namespace YanickSenn.Utils.Editor
+namespace YanickSenn.Utils.Editor.Control
 {
     [CustomPropertyDrawer(typeof(ClassTypeReference))]
     public class ClassTypeReferenceDrawer : PropertyDrawer
