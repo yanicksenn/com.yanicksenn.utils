@@ -127,12 +127,23 @@ namespace YanickSenn.Utils.Editor
 
         private static string CreateSnakeCaseName(SerializedProperty property)
         {
-            var displayName = property.displayName;
-            var nameParts = displayName.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            var snakeCaseParts = new string[nameParts.Length];
-            for (int i = 0; i < nameParts.Length; i++)
+            var rawName = property.displayName;
+            var target = property.serializedObject.targetObject;
+
+            if (target is Component component)
             {
-                snakeCaseParts[i] = nameParts[i].ToLowerInvariant();
+                rawName = component.gameObject.name + " " + rawName;
+            }
+            else if (target is GameObject go)
+            {
+                rawName = go.name + " " + rawName;
+            }
+
+            var parts = rawName.Split(new[] { ' ', '-', '_', '.', ':' }, StringSplitOptions.RemoveEmptyEntries);
+            var snakeCaseParts = new string[parts.Length];
+            for (int i = 0; i < parts.Length; i++)
+            {
+                snakeCaseParts[i] = parts[i].ToLowerInvariant();
             }
 
             return string.Join("_", snakeCaseParts);
