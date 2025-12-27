@@ -5,7 +5,6 @@ using YanickSenn.Utils.Variables;
 namespace YanickSenn.Utils
 {
     public abstract class Reference<TValue, TVariable> 
-            where TValue : IComparable<TValue>
             where TVariable : Variable<TValue>
     {
         [SerializeField] private TValue _const;

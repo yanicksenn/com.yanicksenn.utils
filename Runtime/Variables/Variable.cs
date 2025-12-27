@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace YanickSenn.Utils.Variables
 {
-    public abstract class Variable<T> : ScriptableObject where T : IComparable<T> {
+    public abstract class Variable<T> : ScriptableObject {
         public event Action<T, T> OnValueChanged;
         
         [SerializeField, TextArea] private string description;
@@ -13,7 +13,7 @@ namespace YanickSenn.Utils.Variables
             get => value;
             set {
                 var oldValue = this.value;
-                if (oldValue.CompareTo(value) == 0) {
+                if (Equals(oldValue, value)) {
                     return;
                 }
                 this.value = value;
