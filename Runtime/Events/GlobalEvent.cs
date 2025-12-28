@@ -2,15 +2,15 @@ using System;
 using UnityEngine;
 using YanickSenn.Utils.Control;
 using YanickSenn.Utils.RegistryGeneration;
+using YanickSenn.Utils.Variables;
 
 namespace YanickSenn.Utils.Events
 {
     [CreateAssetMenu(fileName = "GlobalEvent", menuName = "Global Event")]
     [GenerateInjectionRegistry]
-    public class GlobalEvent : ScriptableObject
-    {
-        [SerializeField] private bool disabled;
-        [SerializeField] private bool debug;
+    public class GlobalEvent : ScriptableObject {
+        [SerializeField] private BoolReference disabled = new();
+        [SerializeField] private BoolReference debug = new();
         [SerializeField, TextArea] private string description;
         
         public event Action<Metadata> OnTrigger;
@@ -25,14 +25,14 @@ namespace YanickSenn.Utils.Events
                 new Optional<Sender>(sender),
                 Time.realtimeSinceStartup);
 
-            if (debug) {
-                var stateString = disabled ? "DISABLED" : "ENABLED";
+            if (debug.Value) {
+                var stateString = disabled.Value ? "DISABLED" : "ENABLED";
                 var senderString = metadata.Sender.IsPresent ? $"Sender: {metadata.Sender.Value.GameObject.name}" : "No Sender";
                 var payloadString = metadata.Payload.IsPresent ? $"Payload: {metadata.Payload.Value}" : "No Payload";
                 Debug.Log($"[{stateString}] {name} invoked - {senderString}, {payloadString}", this);
             }
             
-            if (disabled) {
+            if (disabled.Value) {
                 return;
             }
             
@@ -42,6 +42,10 @@ namespace YanickSenn.Utils.Events
         [Serializable]
         public class Sender {
             public GameObject GameObject { get; }
+
+            public static Sender Of(GameObject gameObject) {
+                return new Sender(gameObject);
+            }
             
             public Sender(GameObject gameObject) {
                 GameObject = gameObject;
