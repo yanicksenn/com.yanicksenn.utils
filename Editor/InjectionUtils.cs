@@ -4,8 +4,8 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace YanickSenn.Utils.Editor.RegistryGeneration {
-    internal static class InjectionUtils {
+namespace YanickSenn.Utils.Editor {
+    public static class InjectionUtils {
         
         public static string SanitizeName(string name) {
             if (string.IsNullOrEmpty(name)) return name;

@@ -1,6 +1,6 @@
 {
   "name": "com.yanicksenn.utils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "Utils",
   "description": "A package containing a variety of utils of quality of life improvements when working with Untiy.",
   "unity": "6000.0",
