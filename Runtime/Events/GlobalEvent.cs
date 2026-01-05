@@ -1,24 +1,22 @@
 using System;
 using UnityEngine;
 using YanickSenn.Utils.Control;
-using YanickSenn.Utils.RegistryGeneration;
 using YanickSenn.Utils.Variables;
 
 namespace YanickSenn.Utils.Events
 {
     [CreateAssetMenu(fileName = "GlobalEvent", menuName = "Global Event")]
-    [GenerateInjectionRegistry]
     public class GlobalEvent : ScriptableObject {
         [SerializeField] private BoolReference disabled = new();
         [SerializeField] private BoolReference debug = new();
         [SerializeField, TextArea] private string description;
-        
+
         public event Action<Metadata> OnTrigger;
-        
+
         public void Invoke() => Invoke(payload: null, sender: null);
         public void Invoke(Sender sender) => Invoke(payload: null, sender: sender);
         public void Invoke(object payload) => Invoke(payload: payload, sender: null);
-        
+
         public void Invoke(object payload, Sender sender) {
             var metadata = new Metadata(
                 new Optional<object>(payload),
@@ -31,11 +29,11 @@ namespace YanickSenn.Utils.Events
                 var payloadString = metadata.Payload.IsPresent ? $"Payload: {metadata.Payload.Value}" : "No Payload";
                 Debug.Log($"[{stateString}] {name} invoked - {senderString}, {payloadString}", this);
             }
-            
+
             if (disabled.Value) {
                 return;
             }
-            
+
             OnTrigger?.Invoke(metadata);
         }
 
@@ -46,7 +44,7 @@ namespace YanickSenn.Utils.Events
             public static Sender Of(GameObject gameObject) {
                 return new Sender(gameObject);
             }
-            
+
             public Sender(GameObject gameObject) {
                 GameObject = gameObject;
             }
