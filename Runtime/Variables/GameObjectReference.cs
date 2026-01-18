@@ -5,7 +5,7 @@ using YanickSenn.Utils;
 namespace YanickSenn.Utils.Variables
 {
     [Serializable]
-    public class GameObjectReference : Reference<GameObject, GameObjectVariable> {
+    public class GameObjectReference : Reference<GameObject> {
         public GameObjectReference(GameObject value = default) : base(value) { }
     }
 }
