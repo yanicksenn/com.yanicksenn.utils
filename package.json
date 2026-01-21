@@ -1,12 +1,12 @@
 {
   "name": "com.yanicksenn.utils",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "displayName": "Utils",
   "description": "A package containing a variety of utils of quality of life improvements when working with Untiy.",
   "unity": "6000.0",
   "unityRelease": "51f1",
   "author": {
-    "name": "YanickSenn.Utils",
+    "name": "Yanick Senn",
     "email": "info@yanicksenn.com",
     "url": ""
   },
