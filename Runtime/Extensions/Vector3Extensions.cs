@@ -39,6 +39,21 @@ namespace YanickSenn.Utils.Extensions {
         public static Vector3 WithZ(this Vector3 vector, float z) {
             return new Vector3(vector.x, vector.y, z);
         }
+
+        public static Vector3 SetX(this Vector3 vector, float x) {
+            vector.x = x;
+            return vector;
+        }
+
+        public static Vector3 SetY(this Vector3 vector, float y) {
+            vector.y = y;
+            return vector;
+        }
+
+        public static Vector3 SetZ(this Vector3 vector, float z) {
+            vector.z = z;
+            return vector;
+        }
         
         public static Vector3 WithXFrom(this Vector3 vector, Vector3 other) {
             return vector.ApplyMask(other, Vector3Mask.X);
