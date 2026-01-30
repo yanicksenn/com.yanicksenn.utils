@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Util;
 
@@ -7,7 +6,6 @@ public class StateMachine<T> where T : IStateMachineState<T> {
     private bool _activeTransition;
 
     public T CurrentState => _currentState;
-    public event Action<T?, T> OnStateChanged;
 
     public StateMachine(T initialState) {
         Debug.Assert(initialState != null);
@@ -27,7 +25,5 @@ public class StateMachine<T> where T : IStateMachineState<T> {
         _currentState?.ExitState(newState);
         _currentState = newState;
         newState.EnterState(previousState);
-
-        OnStateChanged?.Invoke(_currentState, newState);
     }
 }
