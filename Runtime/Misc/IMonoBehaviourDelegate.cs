@@ -9,6 +9,9 @@ public interface IMonoBehaviourDelegate {
     void OnDisable() { }
     void OnDestroy() { }
 
+    void OnDrawGizmos() { }
+    void OnDrawGizmosSelected() { }
+
     void OnCollisionEnter(Collision other) { }
     void OnCollisionStay(Collision other) { }
     void OnCollisionExit(Collision other) { }

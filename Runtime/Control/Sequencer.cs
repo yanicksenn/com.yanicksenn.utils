@@ -4,6 +4,8 @@ using System.Collections.Generic;
 namespace YanickSenn.Utils.Control
 {
     public class Sequencer<T> {
+        public event Action<T, T> OnValueChanged;
+        
         private readonly List<T> _elements;
         private readonly int _startingIndex;
         private int _index;
@@ -17,15 +19,30 @@ namespace YanickSenn.Utils.Control
         }
 
         public void Next() {
+            var previousValue = Value;
+            var previousIndex = _index;
             _index = Math.Clamp(_index + 1, 0, _elements.Count - 1);
+            if (_index != previousIndex) {
+                OnValueChanged?.Invoke(Value, previousValue);
+            }
         }
 
         public void Previous() {
+            var previousValue = Value;
+            var previousIndex = _index;
             _index = Math.Clamp(_index - 1, 0, _elements.Count - 1);
+            if (_index != previousIndex) {
+                OnValueChanged?.Invoke(Value, previousValue);
+            }
         }
 
         public void SelectStartingValue() {
+            var previousValue = Value;
+            var previousIndex = _index;
             _index = _startingIndex;
+            if (_index != previousIndex) {
+                OnValueChanged?.Invoke(Value, previousValue);
+            }
         }
     }
 }

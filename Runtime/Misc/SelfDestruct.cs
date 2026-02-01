@@ -9,7 +9,7 @@ namespace YanickSenn.Utils.Misc
         [SerializeField] private float autoDestroyAfter = 3f;
 
         private void Awake() {
-            StartCoroutine(DestroyAfter(3f));
+            StartCoroutine(DestroyAfter(autoDestroyAfter));
         }
 
         private IEnumerator DestroyAfter(float time) {

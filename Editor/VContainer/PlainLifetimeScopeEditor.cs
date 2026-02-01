@@ -22,14 +22,23 @@ namespace YanickSenn.Utils.Editor.VContainer
             if (_showVContainerSettings)
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("parentReference"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("autoRun"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("autoInjectGameObjects"));
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("scriptableObjectInstallers"));
+                DrawPropertyIfFound("parentReference");
+                DrawPropertyIfFound("autoRun");
+                DrawPropertyIfFound("autoInjectGameObjects");
+                DrawPropertyIfFound("scriptableObjectInstallers");
                 EditorGUI.indentLevel--;
             }
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawPropertyIfFound(string propertyName)
+        {
+            var property = serializedObject.FindProperty(propertyName);
+            if (property != null)
+            {
+                EditorGUILayout.PropertyField(property);
+            }
         }
     }
 }

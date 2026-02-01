@@ -8,7 +8,7 @@ namespace YanickSenn.Utils.Misc
     {
         [SerializeField] private Anchor anchor;
         [SerializeField] private Vector3 offset;
-        [SerializeField] private Vector3Mask mask = Vector3Mask.None;
+        [SerializeField] private Vector3Mask mask = Vector3Mask.All;
 
         private void LateUpdate() {
             if (anchor == null) {

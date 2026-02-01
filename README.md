@@ -29,6 +29,72 @@ https://github.com/yanicksenn/com.yanicksenn.utils.git#2.0.5
 
 ## 🚀 Usage
 
+### ⚙️ Provider Lifetime Scope (VContainer)
+
+The `ProviderLifetimeScope` simplifies VContainer registrations by using attribute-based provider methods instead of manually overriding `Configure`. This enforces a clean separation and makes dependency definitions easier to read and maintain.
+
+#### Basic Usage
+
+Inherit from `ProviderLifetimeScope` and use the `[Provides]` attribute on methods that return the service you want to register.
+
+```csharp
+using UnityEngine;
+using VContainer;
+using VContainer.Unity;
+using YanickSenn.Utils.VContainer;
+using YanickSenn.Utils.VContainer.Attributes;
+using YanickSenn.Utils.VContainer.Enums;
+
+public class GameLifetimeScope : ProviderLifetimeScope
+{
+    // 1. Standard Registration (Singleton by default)
+    // Dependencies (IInputService) are automatically injected.
+    [Provides]
+    [RegisterLifetime(Lifetime.Singleton)]
+    public IPlayerService ProvidePlayerService(IInputService input)
+    {
+        return new PlayerService(input);
+    }
+
+    // 2. Instance Registration
+    // Registers a specific pre-created object instance.
+    // Must NOT have arguments.
+    // Uses "GameConfig" as the key.
+    [Provides(RegistrationType.Instance, "GameConfig")]
+    public GameConfig ProvideConfig()
+    {
+        return new GameConfig { Difficulty = "Hard" };
+    }
+
+    // 3. Component Registration
+    // Registers an existing MonoBehaviour or creates one.
+    // Must NOT have arguments.
+    [Provides(RegistrationType.Component)]
+    public CameraController ProvideCamera()
+    {
+        // Example: Finding an existing component in the scene or creating a new object
+        var go = new GameObject("CameraController");
+        return go.AddComponent<CameraController>();
+    }
+
+    // 4. Factory Registration
+    // Registers a factory function (Func<T>).
+    [Provides(RegistrationType.Factory)]
+    public Enemy ProvideEnemyFactory()
+    {
+        // This will allow injecting Func<Enemy> into other classes
+        return new Enemy();
+    }
+}
+```
+
+#### Attributes
+
+| Attribute | Description |
+| :--- | :--- |
+| `[Provides(RegistrationType, Key)]` | Marks a method as a provider. Types: `Standard` (default), `Instance`, `Component`, `Factory`. Optional `Key` for named lookups. |
+| `[RegisterLifetime(Lifetime)]` | Specifies the lifetime (`Singleton`, `Transient`, `Scoped`). Defaults to `Singleton`. |
+
 ### ⚙️ Variables & References
 
 Use `Reference<T>` to allow flexibility in the Inspector. You can assign a constant value or link a `Variable<T>` asset (e.g., `FloatVariable`, `IntVariable`).
