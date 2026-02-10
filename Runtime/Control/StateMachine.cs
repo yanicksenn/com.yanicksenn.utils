@@ -1,7 +1,7 @@
 using UnityEngine;
 using Util;
 
-public class StateMachine<T> where T : IStateMachineState<T> {
+public class StateMachine<T> : IReadOnlyStateMachine<T> where T : IStateMachineState<T> {
     private T _currentState;
     private bool _activeTransition;
 
