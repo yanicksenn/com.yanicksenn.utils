@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace YanickSenn.Utils.Control
 {
-    public class Sequencer<T> {
+    public class Sequencer<T> : IChangeEventEmitter<T> {
         public event Action<T, T> OnValueChanged;
 
         private readonly List<T> _elements;

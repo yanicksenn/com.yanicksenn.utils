@@ -10,10 +10,10 @@ namespace YanickSenn.Utils.Editor.Tests.Control
         {
             bool triggered = false;
             var observable = new Observable<int>(0);
-            observable.OnValueChanged += (oldVal, newVal) => {
+            observable.OnValueChanged += (newVal, oldVal) => {
                 triggered = true;
-                Assert.AreEqual(0, oldVal);
                 Assert.AreEqual(1, newVal);
+                Assert.AreEqual(0, oldVal);
             };
 
             observable.Value = 1;
@@ -25,7 +25,7 @@ namespace YanickSenn.Utils.Editor.Tests.Control
         {
             bool triggered = false;
             var observable = new Observable<int>(1);
-            observable.OnValueChanged += (oldVal, newVal) => triggered = true;
+            observable.OnValueChanged += (newVal, oldVal) => triggered = true;
 
             observable.Value = 1;
             Assert.IsFalse(triggered);

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YanickSenn.Utils.Control
 {
     [Serializable]
-    public struct Observable<T> {
+    public struct Observable<T> : IChangeEventEmitter<T> {
         public event Action<T, T> OnValueChanged;
         
         [SerializeField] private T value;
@@ -14,7 +14,7 @@ namespace YanickSenn.Utils.Control
                 var oldValue = this.value;
                 var newValue = value;
                 this.value = value;
-                MaybeTriggerValueChanged(oldValue, newValue);
+                MaybeTriggerValueChanged(newValue, oldValue);
             }
         }
 
@@ -27,11 +27,11 @@ namespace YanickSenn.Utils.Control
             return new Optional<T>(value);
         }
 
-        private void MaybeTriggerValueChanged(T oldValue, T newValue) {
-            if (oldValue.Equals(newValue)) {
+        private void MaybeTriggerValueChanged(T newValue, T oldValue) {
+            if (newValue.Equals(oldValue)) {
                 return;
             }
-            OnValueChanged?.Invoke(oldValue, newValue);
+            OnValueChanged?.Invoke(newValue, oldValue);
         }
         
     }

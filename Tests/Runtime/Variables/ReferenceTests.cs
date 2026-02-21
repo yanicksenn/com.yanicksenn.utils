@@ -29,6 +29,48 @@ namespace YanickSenn.Utils.Tests.Variables
             Assert.AreEqual(20f, reference.Value);
         }
 
+        [Test]
+        public void Value_Set_ShouldTriggerOnValueChanged()
+        {
+            var reference = new FloatReference(10f);
+            float newValue = 0;
+            float oldValue = 0;
+            reference.OnValueChanged += (n, o) => {
+                newValue = n;
+                oldValue = o;
+            };
+
+            reference.Value = 15f;
+
+            Assert.AreEqual(15f, reference.Value);
+            Assert.AreEqual(15f, newValue);
+            Assert.AreEqual(10f, oldValue);
+        }
+
+        [Test]
+        public void Value_SetWithVariable_ShouldTriggerOnValueChanged()
+        {
+            var variable = ScriptableObject.CreateInstance<FloatVariable>();
+            variable.Value = 20f;
+            var reference = new FloatReference();
+            SetPrivateField(reference, "useVariable", true);
+            SetPrivateField(reference, "_variable", variable);
+
+            float newValue = 0;
+            float oldValue = 0;
+            reference.OnValueChanged += (n, o) => {
+                newValue = n;
+                oldValue = o;
+            };
+
+            reference.Value = 25f;
+
+            Assert.AreEqual(25f, reference.Value);
+            Assert.AreEqual(25f, variable.Value);
+            Assert.AreEqual(25f, newValue);
+            Assert.AreEqual(20f, oldValue);
+        }
+
         private void SetPrivateField(object target, string fieldName, object value)
         {
             // Base type might have the field
