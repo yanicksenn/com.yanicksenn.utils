@@ -23,7 +23,7 @@ namespace YanickSenn.Utils.Control
             var previousIndex = _index;
             _index = Math.Clamp(_index + 1, 0, _elements.Count - 1);
             if (_index != previousIndex) {
-                OnValueChanged?.Invoke(previousValue, Value);
+                OnValueChanged?.Invoke(Value, previousValue);
             }
         }
 
@@ -32,7 +32,7 @@ namespace YanickSenn.Utils.Control
             var previousIndex = _index;
             _index = Math.Clamp(_index - 1, 0, _elements.Count - 1);
             if (_index != previousIndex) {
-                OnValueChanged?.Invoke(previousValue, Value);
+                OnValueChanged?.Invoke(Value, previousValue);
             }
         }
 
@@ -41,7 +41,7 @@ namespace YanickSenn.Utils.Control
             var previousIndex = _index;
             _index = _startingIndex;
             if (_index != previousIndex) {
-                OnValueChanged?.Invoke(previousValue, Value);
+                OnValueChanged?.Invoke(Value, previousValue);
             }
         }
     }
