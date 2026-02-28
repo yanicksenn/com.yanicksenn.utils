@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace YanickSenn.Utils.Misc {
@@ -14,6 +15,8 @@ namespace YanickSenn.Utils.Misc {
             public float Interval { get; }
             public bool IsPeriodic { get; }
             public float TriggerTime { get; set; }
+            public bool IsPaused { get; set; }
+            public float RemainingTime { get; set; }
 
             public ScheduledOrder(SchedulerOrder order) {
                 Callback = order.Callback;
@@ -21,7 +24,13 @@ namespace YanickSenn.Utils.Misc {
                 Delay = order.Schedule.Delay;
                 Interval = order.Schedule.Interval;
                 IsPeriodic = order.Schedule.IsPeriodic;
-                TriggerTime = Time.time + Delay;
+                IsPaused = order.IsPaused;
+
+                if (IsPaused) {
+                    RemainingTime = Delay;
+                } else {
+                    TriggerTime = Time.time + Delay;
+                }
             }
         }
 
@@ -51,6 +60,8 @@ namespace YanickSenn.Utils.Misc {
                     _orders.RemoveAt(i);
                     continue;
                 }
+
+                if (order.IsPaused) continue;
 
                 if (!(currentTime >= order.TriggerTime)) continue;
                 // Invoke callback
@@ -113,6 +124,34 @@ namespace YanickSenn.Utils.Misc {
         /// <param name="orderId">The ID of the orders.</param>
         public void CancelAllOrders(string orderId) {
             CancelWhere(o => o.OrderId == orderId);
+        }
+
+        /// <summary>
+        /// Pauses a specific order by its callback and order ID.
+        /// </summary>
+        /// <param name="callback">The event handler of the order.</param>
+        /// <param name="orderId">The ID of the order.</param>
+        public void PauseOrder(ISchedulerEventHandler callback, string orderId) {
+            foreach (var order in _orders.Union(_pendingAdditions)) {
+                if (order.Callback == callback && order.OrderId == orderId && !order.IsPaused) {
+                    order.IsPaused = true;
+                    order.RemainingTime = order.TriggerTime - Time.time;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Resumes a specific order by its callback and order ID.
+        /// </summary>
+        /// <param name="callback">The event handler of the order.</param>
+        /// <param name="orderId">The ID of the order.</param>
+        public void ResumeOrder(ISchedulerEventHandler callback, string orderId) {
+            foreach (var order in _orders.Union(_pendingAdditions)) {
+                if (order.Callback == callback && order.OrderId == orderId && order.IsPaused) {
+                    order.IsPaused = false;
+                    order.TriggerTime = Time.time + order.RemainingTime;
+                }
+            }
         }
 
         private void CancelWhere(Predicate<ScheduledOrder> match) {

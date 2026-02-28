@@ -117,5 +117,38 @@ namespace YanickSenn.Utils.Tests.Misc
             Assert.AreEqual("testB", _handler.LastOrderId);
             Assert.AreEqual(0, _handler2.InvocationCount);
         }
+
+        [UnityTest]
+        public IEnumerator PauseOrder_DoesNotInvokeCallback()
+        {
+            var order = new SchedulerOrder.Builder(_handler, "testPause", 0.1f)
+                .AsPaused()
+                .Build();
+                
+            _scheduler.Schedule(order);
+            
+            yield return new WaitForSeconds(0.15f);
+            Assert.AreEqual(0, _handler.InvocationCount);
+        }
+
+        [UnityTest]
+        public IEnumerator ResumeOrder_InvokesCallbackAfterRemainingTime()
+        {
+            var order = new SchedulerOrder.Builder(_handler, "testResume", 0.2f)
+                .Build();
+                
+            _scheduler.Schedule(order);
+            
+            yield return new WaitForSeconds(0.1f);
+            _scheduler.PauseOrder(_handler, "testResume");
+            
+            yield return new WaitForSeconds(0.2f);
+            Assert.AreEqual(0, _handler.InvocationCount);
+            
+            _scheduler.ResumeOrder(_handler, "testResume");
+            
+            yield return new WaitForSeconds(0.15f);
+            Assert.AreEqual(1, _handler.InvocationCount);
+        }
     }
 }

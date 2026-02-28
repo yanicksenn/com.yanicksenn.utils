@@ -10,12 +10,14 @@ namespace YanickSenn.Utils.Misc
         public ISchedulerEventHandler Callback { get; }
         public string OrderId { get; }
         public Schedule Schedule { get; }
+        public bool IsPaused { get; }
 
-        private SchedulerOrder(ISchedulerEventHandler callback, string orderId, Schedule schedule)
+        private SchedulerOrder(ISchedulerEventHandler callback, string orderId, Schedule schedule, bool isPaused)
         {
             Callback = callback;
             OrderId = orderId;
             Schedule = schedule;
+            IsPaused = isPaused;
         }
 
         /// <summary>
@@ -26,6 +28,7 @@ namespace YanickSenn.Utils.Misc
             private readonly ISchedulerEventHandler _callback;
             private readonly string _orderId;
             private Schedule _schedule;
+            private bool _isPaused;
 
             public Builder(ISchedulerEventHandler callback, string orderId, Schedule schedule)
             {
@@ -47,9 +50,15 @@ namespace YanickSenn.Utils.Misc
                 return this;
             }
 
+            public Builder AsPaused(bool isPaused = true)
+            {
+                _isPaused = isPaused;
+                return this;
+            }
+
             public SchedulerOrder Build()
             {
-                return new SchedulerOrder(_callback, _orderId, _schedule);
+                return new SchedulerOrder(_callback, _orderId, _schedule, _isPaused);
             }
         }
     }
