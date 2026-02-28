@@ -18,9 +18,9 @@ namespace YanickSenn.Utils.Misc {
             public ScheduledOrder(SchedulerOrder order) {
                 Callback = order.Callback;
                 OrderId = order.OrderId;
-                Delay = order.Delay;
-                Interval = order.Interval;
-                IsPeriodic = order.IsPeriodic;
+                Delay = order.Schedule.Delay;
+                Interval = order.Schedule.Interval;
+                IsPeriodic = order.Schedule.IsPeriodic;
                 TriggerTime = Time.time + Delay;
             }
         }

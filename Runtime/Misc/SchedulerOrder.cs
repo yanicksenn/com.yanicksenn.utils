@@ -9,17 +9,13 @@ namespace YanickSenn.Utils.Misc
     {
         public ISchedulerEventHandler Callback { get; }
         public string OrderId { get; }
-        public float Delay { get; }
-        public float Interval { get; }
-        public bool IsPeriodic { get; }
+        public Schedule Schedule { get; }
 
-        private SchedulerOrder(ISchedulerEventHandler callback, string orderId, float delay, float interval, bool isPeriodic)
+        private SchedulerOrder(ISchedulerEventHandler callback, string orderId, Schedule schedule)
         {
             Callback = callback;
             OrderId = orderId;
-            Delay = delay;
-            Interval = interval;
-            IsPeriodic = isPeriodic;
+            Schedule = schedule;
         }
 
         /// <summary>
@@ -29,27 +25,31 @@ namespace YanickSenn.Utils.Misc
         {
             private readonly ISchedulerEventHandler _callback;
             private readonly string _orderId;
-            private readonly float _delay;
-            private float _interval = 0f;
-            private bool _isPeriodic = false;
+            private Schedule _schedule;
+
+            public Builder(ISchedulerEventHandler callback, string orderId, Schedule schedule)
+            {
+                _callback = callback;
+                _orderId = orderId;
+                _schedule = schedule;
+            }
 
             public Builder(ISchedulerEventHandler callback, string orderId, float delay)
             {
                 _callback = callback;
                 _orderId = orderId;
-                _delay = delay;
+                _schedule = new Schedule(delay);
             }
 
             public Builder AsPeriodic(float interval)
             {
-                _interval = interval;
-                _isPeriodic = true;
+                _schedule = new Schedule(_schedule.Delay, interval, true);
                 return this;
             }
 
             public SchedulerOrder Build()
             {
-                return new SchedulerOrder(_callback, _orderId, _delay, _interval, _isPeriodic);
+                return new SchedulerOrder(_callback, _orderId, _schedule);
             }
         }
     }
