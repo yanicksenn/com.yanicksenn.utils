@@ -44,6 +44,19 @@ https://github.com/yanicksenn/com.yanicksenn.utils.git#2.0.5
 
 Use `Reference<T>` to allow flexibility in the Inspector. You can assign a constant value or link a `Variable<T>` asset (e.g., `FloatVariable`, `IntVariable`).
 
+The following types are available:
+
+| Type | Variable Asset | Reference Field |
+| :--- | :--- | :--- |
+| **AnimationCurve** | `AnimationCurveVariable` | `AnimationCurveReference` |
+| **Bool** | `BoolVariable` | `BoolReference` |
+| **Float** | `FloatVariable` | `FloatReference` |
+| **GameObject** | `GameObjectVariable` | `GameObjectReference` |
+| **Int** | `IntVariable` | `IntReference` |
+| **LayerMask** | `LayerMaskVariable` | `LayerMaskReference` |
+| **Material** | `MaterialVariable` | `MaterialReference` |
+| **Schedule** | `ScheduleVariable` | `ScheduleReference` |
+
 ```csharp
 using UnityEngine;
 using YanickSenn.Utils.Variables;
