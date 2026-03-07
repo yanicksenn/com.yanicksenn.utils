@@ -1,6 +1,6 @@
 {
   "name": "com.yanicksenn.utils",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "displayName": "Utils",
   "description": "A package containing a variety of utils of quality of life improvements when working with Untiy.",
   "unity": "6000.0",
@@ -11,6 +11,7 @@
     "url": ""
   },
   "dependencies": {
+    "com.unity.splines": "2.8.3",
     "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.17.0"
   }
 }

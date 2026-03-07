@@ -4,7 +4,9 @@
     "references": [
         "YanickSenn.Utils",
         "VContainer",
-        "VContainer.Editor"
+        "VContainer.Editor",
+        "Unity.Splines",
+        "Unity.Splines.Editor"
     ],
     "includePlatforms": [
         "Editor"
