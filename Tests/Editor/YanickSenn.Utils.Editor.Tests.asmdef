@@ -1,4 +1,3 @@
-
 {
     "name": "YanickSenn.Utils.Editor.Tests",
     "rootNamespace": "YanickSenn.Utils.Editor.Tests",
@@ -7,16 +6,26 @@
         "YanickSenn.Utils.Editor",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
+        "Unity.Mathematics",
+        "Unity.Mathematics.Editor",
         "Unity.Splines",
-        "Unity.Splines.Editor"
+        "Unity.Splines.Editor",
+        "PrimeTween.Runtime",
+        "PrimeTween.Editor"
     ],
-    "includePlatforms": ["Editor"],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": ["nunit.framework.dll"],
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
     "autoReferenced": false,
-    "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }

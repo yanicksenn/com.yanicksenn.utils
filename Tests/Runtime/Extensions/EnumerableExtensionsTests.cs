@@ -87,5 +87,34 @@ namespace YanickSenn.Utils.Tests.Extensions
             Assert.AreEqual("ccc", result.element);
             Assert.AreEqual(3, result.key);
         }
+
+        [Test]
+        public void Union_WithParams_ShouldReturnUnionOfElements()
+        {
+            var list = new List<int> { 1, 2, 3 };
+            var result = list.Union(3, 4, 5).ToList();
+            
+            Assert.AreEqual(5, result.Count);
+            Assert.IsTrue(result.Contains(1));
+            Assert.IsTrue(result.Contains(2));
+            Assert.IsTrue(result.Contains(3));
+            Assert.IsTrue(result.Contains(4));
+            Assert.IsTrue(result.Contains(5));
+        }
+
+        [Test]
+        public void Concat_WithParams_ShouldReturnConcatenatedElements()
+        {
+            var list = new List<int> { 1, 2, 3 };
+            var result = list.Concat(3, 4, 5).ToList();
+            
+            Assert.AreEqual(6, result.Count);
+            Assert.AreEqual(1, result[0]);
+            Assert.AreEqual(2, result[1]);
+            Assert.AreEqual(3, result[2]);
+            Assert.AreEqual(3, result[3]);
+            Assert.AreEqual(4, result[4]);
+            Assert.AreEqual(5, result[5]);
+        }
     }
 }

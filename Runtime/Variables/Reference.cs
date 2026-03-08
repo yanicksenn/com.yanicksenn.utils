@@ -4,7 +4,7 @@ using YanickSenn.Utils.Variables;
 
 namespace YanickSenn.Utils
 {
-    public abstract class Reference<TValue> : IChangeEventEmitter<TValue>
+    public abstract class Reference<TValue> : IValue<TValue>, IChangeEventEmitter<TValue>
     {
         public event Action<TValue, TValue> OnValueChanged;
 

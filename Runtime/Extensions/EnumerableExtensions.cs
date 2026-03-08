@@ -168,5 +168,23 @@ namespace YanickSenn.Utils.Extensions {
             }
             return (max, maxKey);
         }
+
+        /// <summary>
+        /// Produces the set union of a sequence and a dynamic amount of additional elements by using the default equality comparer.
+        /// </summary>
+        public static IEnumerable<T> Union<T>(this IEnumerable<T> source, params T[] elements) {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            return System.Linq.Enumerable.Union(source, elements);
+        }
+
+        /// <summary>
+        /// Concatenates a sequence with a dynamic amount of additional elements.
+        /// </summary>
+        public static IEnumerable<T> Concat<T>(this IEnumerable<T> source, params T[] elements) {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            return System.Linq.Enumerable.Concat(source, elements);
+        }
     }
 }

@@ -5,8 +5,12 @@
         "YanickSenn.Utils",
         "VContainer",
         "VContainer.Editor",
+        "Unity.Mathematics",
+        "Unity.Mathematics.Editor",
         "Unity.Splines",
-        "Unity.Splines.Editor"
+        "Unity.Splines.Editor",
+        "PrimeTween.Runtime",
+        "PrimeTween.Editor"
     ],
     "includePlatforms": [
         "Editor"

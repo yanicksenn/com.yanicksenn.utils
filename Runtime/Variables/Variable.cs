@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace YanickSenn.Utils.Variables
 {
-    public abstract class Variable<T> : ScriptableObject, IChangeEventEmitter<T> {
+    public abstract class Variable<T> : ScriptableObject, IValue<T>, IChangeEventEmitter<T> {
         public event Action<T, T> OnValueChanged;
-        
+
         [SerializeField, TextArea] private string description;
         [SerializeField] private T value;
 

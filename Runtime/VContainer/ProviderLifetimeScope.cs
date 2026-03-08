@@ -10,7 +10,11 @@ namespace YanickSenn.Utils.VContainer {
     public class ProviderLifetimeScope : LifetimeScope {
         protected sealed override void Configure(IContainerBuilder builder) {
             ConfigureProvider(builder);
+
+            builder.RegisterBuildCallback(OnInitialized);
         }
+
+        protected virtual void OnInitialized(IObjectResolver resolver) { }
 
         protected virtual void ConfigureProvider(IContainerBuilder builder) {
             var methods = GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -98,7 +102,7 @@ namespace YanickSenn.Utils.VContainer {
             var registration = builder.RegisterFactory<T>(resolver => {
                 return () => (T)InvokeWithResolvedArgs(method, resolver);
             }, lifetime);
-            
+
             if (key != null) {
                 registration.Keyed(key);
             }
