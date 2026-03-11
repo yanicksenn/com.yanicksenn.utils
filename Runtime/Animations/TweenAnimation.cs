@@ -10,14 +10,14 @@ namespace YanickSenn.Utils.Animations {
 
         public override bool IsPlaying => _currentState is PlayingState;
 
-        public override void Play(TConfig config) {
+        protected override void DoPlay(TConfig config) {
             if (_currentState is PlayingState) {
                 return;
             }
 
             _currentState = new PlayingState(CreateTween(config).OnComplete(() => {
                 _currentState = new IdlingState();
-                Complete(aborted: false);
+                Complete(AnimationCompletionState.COMPLETED);
             }));
         }
 
@@ -31,7 +31,7 @@ namespace YanickSenn.Utils.Animations {
             }
 
             _currentState = new IdlingState();
-            Complete(aborted: true);
+            Complete(AnimationCompletionState.ABORTED);
         }
 
         /// <summary>

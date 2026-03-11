@@ -22,7 +22,7 @@ namespace YanickSenn.Utils.Animations {
             _currentState = new IdlingState();
         }
 
-        public override void Play(ISplineConfig config) {
+        protected override void DoPlay(ISplineConfig config) {
             if (_currentState is PlayingState) {
                 return;
             }
@@ -37,8 +37,10 @@ namespace YanickSenn.Utils.Animations {
                         1f,
                         duration,
                         (target, t) => target.UpdateTransform(t))
-                    .OnComplete(() => Complete(false)));
-        }
+                        .OnComplete(() => {
+                        _currentState = new IdlingState();
+                        Complete(AnimationCompletionState.COMPLETED);
+                        }));        }
 
         public override void Stop() {
             if (_currentState is not PlayingState playingState) {
@@ -50,7 +52,7 @@ namespace YanickSenn.Utils.Animations {
             }
 
             _currentState = new IdlingState();
-            Complete(true);
+            Complete(AnimationCompletionState.ABORTED);
         }
 
         private void UpdateTransform(float t) {
